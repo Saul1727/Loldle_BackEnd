@@ -1,3 +1,15 @@
 spring:
+  datasource:
+    url: jdbc:postgresql://db.rsikwmzhdtfueqgisxgt.supabase.co:5432/postgres?sslmode=require
+    username: postgres
+    password: qT8R$UBUcmDJ^M5FUK!x$GNV4*N8BbbgUi*v$yA9v*FMCXn5VhhyTysFhriJ
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+       dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
   application:
-    name: Loldle1v1
+    name: Loldle1vs1
