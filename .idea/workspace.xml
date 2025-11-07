@@ -1,118 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
-  <component name="ChangeListManager">
-    <list default="true" id="9c5b505a-2570-4273-a898-ab079387fb6c" name="Changes" comment="Julio, espabila que lo estoy haciendo todox3">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Loldle1v1/Loldle1v1/HELP.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Loldle1v1/Loldle1v1/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Loldle1v1/Loldle1v1/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Loldle1v1/Loldle1v1/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Loldle1v1/Loldle1v1/src/main/java/com/example/Loldle1v1/Controller/prueba.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Loldle1v1/Loldle1v1/src/main/java/com/example/Loldle1v1/Loldle1v1Application.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Loldle1v1/Loldle1v1/src/main/java/com/example/Loldle1v1/Model/prueba.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Loldle1v1/Loldle1v1/src/main/java/com/example/Loldle1v1/Repository/prueba.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Loldle1v1/Loldle1v1/src/main/java/com/example/Loldle1v1/Service/prueba.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Loldle1v1/Loldle1v1/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Loldle1v1/Loldle1v1/src/test/java/com/example/Loldle1v1/Loldle1v1ApplicationTests.java" beforeDir="false" />
-    </list>
-    <option name="SHOW_DIALOG" value="false" />
-    <option name="HIGHLIGHT_CONFLICTS" value="true" />
-    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
-    <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Saul1727"
-  }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Saul1727/Loldle_Back.git",
-    "accountId": "75d1b4cb-5899-4ffa-936f-d6335d2507f0"
-  }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
-  <component name="ProjectId" id="359jEtKUEJSRy2UKOK3kDzCEXXN" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true"
-  }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Saúl\IdeaProjects\Loldle_Back\Loldle1v1" />
-      <recent name="C:\Users\Saúl\IdeaProjects\Loldle_Back" />
-    </key>
-  </component>
-  <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="9c5b505a-2570-4273-a898-ab079387fb6c" name="Changes" comment="" />
-      <created>1762529072964</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1762529072964</updated>
-    </task>
-    <task id="LOCAL-00001" summary="Julio, espabila que lo estoy haciendo todo">
-      <option name="closed" value="true" />
-      <created>1762530762758</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1762530762758</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Julio, espabila que lo estoy haciendo todox2">
-      <option name="closed" value="true" />
-      <created>1762530923525</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1762530923525</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Julio, espabila que lo estoy haciendo todox3">
-      <option name="closed" value="true" />
-      <created>1762531119724</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1762531119724</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
-    <servers />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Julio, espabila que lo estoy haciendo todo" />
-    <MESSAGE value="Julio, espabila que lo estoy haciendo todox2" />
-    <MESSAGE value="Julio, espabila que lo estoy haciendo todox3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Julio, espabila que lo estoy haciendo todox3" />
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Loldle_Back" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Loldle_Back" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
   </component>
 </project>

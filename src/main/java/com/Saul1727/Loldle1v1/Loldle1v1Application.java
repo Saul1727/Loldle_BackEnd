@@ -1,4 +1,4 @@
-package com.example.Loldle1v1;
+package com.Saul1727.Loldle1v1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
