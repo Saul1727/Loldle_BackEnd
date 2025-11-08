@@ -22,8 +22,9 @@ public class Champion {
     private Gender gender;
 
     @Lob
-    @Column(columnDefinition = "LONGBLOB")
+    @Column(columnDefinition = "bytea")
     private byte[] image;
+
 
     @Enumerated(EnumType.STRING)
     private Position position;
