@@ -1,8 +1,12 @@
 package com.Saul1727.Loldle1v1.services;
 
 
+import com.Saul1727.Loldle1v1.models.Champion;
 import com.Saul1727.Loldle1v1.repository.ChampionRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ChampionService {
@@ -12,4 +16,11 @@ public class ChampionService {
         this.championRepository = championRepository;
     }
 
+    public Optional<Champion> findChampionByName(String name){
+        return championRepository.findByName(name);
+    }
+
+    public List<Champion> getAllChampions(){
+        return championRepository.findAll();
+    }
 }

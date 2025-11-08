@@ -1,4 +1,4 @@
-package com.Saul1727.Loldle1v1.models.Enums;
+package com.Saul1727.Loldle1v1.models.enums;
 
 public enum Resource {
     MANA,

@@ -1,14 +1,18 @@
 package com.Saul1727.Loldle1v1.models;
 
-import com.Saul1727.Loldle1v1.models.Enums.*;
+import com.Saul1727.Loldle1v1.models.enums.*;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Setter
 @Getter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Champion {
 
     @Id
