@@ -18,7 +18,8 @@ public class Champion {
     @Id
     private String name;
 
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @Lob
     @Column(columnDefinition = "LONGBLOB")
