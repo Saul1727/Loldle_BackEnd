@@ -15,7 +15,7 @@ public enum Species {
     CELESTIAL,
     DRAGON,
     GOD_WARRIOR,
-    VOLD_BEING,
+    VOID_BEING,
     GOLEM,
     MAGICALLY_ALTERED,
     CYBORG,
