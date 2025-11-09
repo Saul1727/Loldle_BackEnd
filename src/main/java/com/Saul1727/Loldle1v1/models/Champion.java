@@ -18,28 +18,26 @@ public class Champion {
     @Id
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
+
+    private String gender;
 
     @Lob
     @Column(columnDefinition = "bytea")
     private byte[] image;
 
+    private String position;
 
-    @Enumerated(EnumType.STRING)
-    private Position position;
 
-    @Enumerated(EnumType.STRING)
-    private Species species;
+    private String species;
 
-    @Enumerated(EnumType.STRING)
-    private Resource resource;
 
-    @Enumerated(EnumType.STRING)
-    private Range_Type rangeType;
+    private String resource;
 
-    @Enumerated(EnumType.STRING)
-    private Region region;
+
+    private String rangeType;
+
+
+    private String region;
 
     private int year;
 }

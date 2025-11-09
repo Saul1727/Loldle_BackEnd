@@ -37,6 +37,7 @@ public class ChampionController {
         }*/
     }
 // Linkeado con el servicio el cual usa el getAll predefinido del repo.
+    @GetMapping
     public List<Champion> getAllChampions(){
         return championService.getAllChampions();
     }
