@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ChampionRepository extends JpaRepository<Champion, Long> {
+public interface ChampionRepository extends JpaRepository<Champion, String > {
     Optional<Champion> findByName(String name);
 
 
