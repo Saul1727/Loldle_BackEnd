@@ -21,7 +21,6 @@ public class Champion {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Lob
     @Column(columnDefinition = "bytea")
     private byte[] image;
 
