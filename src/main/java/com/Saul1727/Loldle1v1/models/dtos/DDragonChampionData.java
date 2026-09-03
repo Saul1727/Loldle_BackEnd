@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DDragonChampionData {
+    public String name;
     public String partype; // "Mana", "Energy", "None", etc.
     public Stats stats;
 }

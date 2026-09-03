@@ -1,6 +1,7 @@
 package com.Saul1727.Loldle1v1.services;
 
 import com.Saul1727.Loldle1v1.models.User;
+import com.Saul1727.Loldle1v1.models.dtos.UserRegisterRequest;
 import com.Saul1727.Loldle1v1.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,15 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
-    public User registerUser(User user){
-        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+    // Recibe el DTO de registro (no el User directamente) para que nadie pueda
+    // colarnos un id u otro campo que no sea username/password.
+    public User registerUser(UserRegisterRequest request){
+        if (userRepository.findByUsername(request.getUsername()).isPresent()) {
             throw new IllegalArgumentException("El nombre de usuario ya existe");
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         return userRepository.save(user);
     }
 

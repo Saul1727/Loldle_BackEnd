@@ -13,3 +13,26 @@ spring:
     show-sql: true
   application:
     name: Loldle1vs1
+
+server:
+  error:
+    include-message: never
+    include-stacktrace: never
+    include-binding-errors: never
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+app:
+  frontend-origin: ${FRONTEND_ORIGIN:http://localhost:3000}
+  champions:
+    auto-populate: ${AUTO_POPULATE_CHAMPIONS:true}
+
+riot:
+  ddragon:
+    base-url: ${DDRAGON_BASE_URL:https://ddragon.leagueoflegends.com}
+  universe:
+    base-url: ${UNIVERSE_BASE_URL:https://universe-meeps.leagueoflegends.com/v1/en_us}
