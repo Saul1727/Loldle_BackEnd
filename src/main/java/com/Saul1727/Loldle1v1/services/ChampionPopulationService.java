@@ -4,7 +4,7 @@ import com.Saul1727.Loldle1v1.models.Champion;
 import com.Saul1727.Loldle1v1.models.dtos.DDragonChampionData;
 import com.Saul1727.Loldle1v1.models.dtos.DDragonResponseDto;
 import com.Saul1727.Loldle1v1.models.dtos.UniverseChampionDto;
-import com.Saul1727.Loldle1v1.models.dtos.UniverseIndexDto;
+import com.Saul1727.Loldle1v1.models.enums.Species;
 import com.Saul1727.Loldle1v1.repository.ChampionRepository;
 import com.Saul1727.Loldle1v1.util.RiotDataMapper;
 import org.slf4j.Logger;
@@ -18,6 +18,7 @@ import org.springframework.web.client.RestClient;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 // Rellena la tabla de campeones a partir de la API pública de Riot (DDragon) y de la
@@ -27,9 +28,11 @@ import java.util.Map;
 // no vuelve a golpear la API de Riot cada vez. Si algo falla a mitad, se loguea y la
 // app sigue arrancando igual: esto es un job de datos, no algo crítico para servir peticiones.
 //
-// OJO: la URL de la Universe API no es oficial ni está documentada por Riot (es la que
-// usan varias webs de la comunidad), así que si cambia o responde distinto a lo esperado
-// se puede sobreescribir con la propiedad riot.universe.base-url sin tocar código.
+// OJO: la Universe API no es oficial ni está documentada por Riot (es la que usan varias
+// webs de la comunidad). Su endpoint de índice (champions/index.json) devuelve 403 porque
+// necesita listar el bucket de S3 y ese permiso está deshabilitado, pero la página de cada
+// campeón por separado (champions/{slug}/index.json) sigue funcionando, así que pedimos
+// cada campeón individualmente en vez de depender del índice.
 @Service
 public class ChampionPopulationService implements ApplicationRunner {
 
@@ -72,14 +75,17 @@ public class ChampionPopulationService implements ApplicationRunner {
     public void populate() {
         log.info("Poblando campeones desde la API de Riot...");
 
-        Map<String, Champion> champions = fetchFromDDragon();
-        enrichWithUniverseData(champions);
+        // slug de Universe (id de DDragon en minúsculas) -> nombre del campeón, para
+        // poder pedir cada página de Universe y saber a qué Champion aplicar la respuesta.
+        Map<String, String> championNameBySlug = new HashMap<>();
+        Map<String, Champion> champions = fetchFromDDragon(championNameBySlug);
+        enrichWithUniverseData(champions, championNameBySlug);
 
         championRepository.saveAll(champions.values());
         log.info("Población completada: {} campeones guardados", champions.size());
     }
 
-    private Map<String, Champion> fetchFromDDragon() {
+    private Map<String, Champion> fetchFromDDragon(Map<String, String> championNameBySlug) {
         String[] versions = restClient.get()
                 .uri(ddragonBaseUrl + "/api/versions.json")
                 .retrieve()
@@ -105,59 +111,48 @@ public class ChampionPopulationService implements ApplicationRunner {
                 champion.setRangeType(RiotDataMapper.mapRangeType(data.stats.attackrange));
             }
             champions.put(data.name, champion);
+
+            if (data.id != null && !data.id.isBlank()) {
+                championNameBySlug.put(data.id.toLowerCase(Locale.ROOT), data.name);
+            }
         }
         return champions;
     }
 
-    private void enrichWithUniverseData(Map<String, Champion> champions) {
-        UniverseIndexDto index;
-        try {
-            index = restClient.get()
-                    .uri(universeBaseUrl + "/champions/index.json")
-                    .retrieve()
-                    .body(UniverseIndexDto.class);
-        } catch (Exception e) {
-            log.warn("No se pudo consultar el índice de la Universe API, los campeones se guardan sin región/especie/año", e);
-            return;
-        }
-
-        if (index == null || index.champions == null) {
-            return;
-        }
-
-        for (UniverseIndexDto.Entry entry : index.champions) {
+    private void enrichWithUniverseData(Map<String, Champion> champions, Map<String, String> championNameBySlug) {
+        for (Map.Entry<String, String> entry : championNameBySlug.entrySet()) {
+            String slug = entry.getKey();
+            String championName = entry.getValue();
             try {
                 UniverseChampionDto detail = restClient.get()
-                        .uri(universeBaseUrl + "/champions/{slug}/index.json", entry.id)
+                        .uri(universeBaseUrl + "/champions/{slug}/index.json", slug)
                         .retrieve()
                         .body(UniverseChampionDto.class);
-                applyUniverseData(champions, detail);
+                applyUniverseData(champions.get(championName), detail);
             } catch (Exception e) {
-                log.debug("No se pudo obtener info de Universe para {}", entry.id, e);
+                log.debug("No se pudo obtener info de Universe para {}", slug, e);
             }
-
             sleepBriefly();
         }
     }
 
-    private void applyUniverseData(Map<String, Champion> champions, UniverseChampionDto detail) {
-        if (detail == null || detail.name == null) {
+    private void applyUniverseData(Champion champion, UniverseChampionDto detail) {
+        if (champion == null || detail == null || detail.champion == null) {
             return;
         }
-        Champion champion = champions.get(detail.name);
-        if (champion == null) {
-            return;
-        }
+        UniverseChampionDto.ChampionDetails info = detail.champion;
 
-        if (detail.champion != null) {
-            if (detail.champion.releaseDate != null) {
-                champion.setYear(extractYear(detail.champion.releaseDate));
-            }
-            champion.setRegion(RiotDataMapper.mapRegion(detail.champion.associatedFactionSlug));
+        if (info.releaseDate != null) {
+            champion.setYear(extractYear(info.releaseDate));
         }
+        champion.setRegion(RiotDataMapper.mapRegion(info.associatedFactionSlug));
 
-        if (detail.races != null && !detail.races.isEmpty()) {
-            champion.setSpecies(RiotDataMapper.mapSpecies(detail.races.get(0).name));
+        // Riot solo lista una raza cuando el campeón NO es humano; una lista vacía
+        // significa "humano" por convención, no "desconocido".
+        if (info.races == null || info.races.isEmpty()) {
+            champion.setSpecies(Species.HUMAN);
+        } else {
+            champion.setSpecies(RiotDataMapper.mapSpecies(info.races.get(0).name));
         }
     }
 

@@ -30,9 +30,14 @@ public final class RiotDataMapper {
         if (factionSlug == null || factionSlug.isBlank()) {
             return Region.UNKNOWN;
         }
-        Region mapped = "THE_VOID".equals(normalize(factionSlug))
-                ? Region.VOID
-                : tryValueOf(Region.class, factionSlug);
+        Region mapped = switch (normalize(factionSlug)) {
+            case "THE_VOID" -> Region.VOID;
+            // La Universe API usa el slug "mount-targon", nuestro enum lo llama TARGON.
+            case "MOUNT_TARGON" -> Region.TARGON;
+            // "unaffiliated" (Jax y otros) no tiene un valor propio en el enum.
+            case "UNAFFILIATED" -> Region.UNKNOWN;
+            default -> tryValueOf(Region.class, factionSlug);
+        };
         return mapped != null ? mapped : Region.UNKNOWN;
     }
 
